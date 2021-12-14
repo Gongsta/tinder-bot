@@ -76,21 +76,13 @@ class TinderServer(Server):
             return False
 
         return False
+    def write_data_to_json(self, match):
+        # Hard store this data that can be analyzed at a later time
+        # TODO:
         
 
 
 server = TinderServer()
 server.start()
-# try:
-#     match = DeepFace.analyze(img_path = "image.jpg", actions = ['race'])
-#     print(match)
-    
-#     tinder_robot.swipe_right() if match['dominant_race'] == 'asian' else tinder_robot.swipe_left()
-    
-#     print(tinder_robot.right_swipes)
-# except Exception as e:
-#     print("Face could not be detected", e)
-#     tinder_robot.swipe_left()
-
 
     

@@ -1,5 +1,5 @@
 from time import sleep
-# from raspberry import *
+from raspberry import *
 import cv2
 from helper import Client
 
@@ -32,7 +32,7 @@ client.connect_to_server()
 
 video_capture = cv2.VideoCapture(0)
 
-# tinder_robot = TinderRobot()
+tinder_robot = TinderRobot()
 
 while True:
     ret, frame = video_capture.read()
@@ -48,5 +48,5 @@ while True:
         cv2.destroyAllWindows()
         print("Program terminated, I hope you found your match :)")
         break
-#     tinder_robot.swipe_right() if match['dominant_race'] == 'asian' else tinder_robot.swipe_left()
+    tinder_robot.swipe_right() if match['dominant_race'] == 'asian' else tinder_robot.swipe_left()
     
