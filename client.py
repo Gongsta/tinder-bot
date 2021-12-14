@@ -14,18 +14,19 @@ tinder_robot = TinderRobot()
 
 while True:
     ret, frame = video_capture.read()
-#     cv2.imshow('Video', frame)
+    cv2.imshow('Video', frame)
 
     cv2.imwrite("image.jpg", frame)
     # actions = ['age', 'gender', 'race', 'emotion']
     try:
         match = DeepFace.analyze(img_path = "image.jpg", actions = ['race'])
+        print(match)
         
         tinder_robot.swipe_right() if match['dominant_race'] == 'asian' else tinder_robot.swipe_left()
         
         print(tinder_robot.right_swipes)
-    except:
-        print("Face could not be detected")
+    except Exception as e:
+        print("Face could not be detected", e)
         tinder_robot.swipe_left()
 
 

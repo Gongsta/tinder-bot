@@ -2,15 +2,8 @@ from gpiozero import OutputDevice as stepper
 from time import sleep
 
 
-xAxisMotorIN1 = stepper(4)
-xAxisMotorIN2 = stepper(17)
-xAxisMotorIN3 = stepper(27)
-xAxisMotorIN4 = stepper(22)
 
-xAxisPins = [xAxisMotorIN1, xAxisMotorIN2, xAxisMotorIN3, xAxisMotorIN4]
-
-
-def moveMotor(angle=180, mode="SPEED", pins=xAxisPins, stepsPerRevolution = 2048):
+def moveMotor(pins, angle=-180, mode="SPEED", stepsPerRevolution = 2048):
   stepsToComplete = int(angle * stepsPerRevolution / 360)
 
   # https://www.hackster.io/mjrobot/playing-with-electronics-rpi-gpio-zero-library-tutorial-f984c9#toc-controlling-a-stepper-motor-6
@@ -41,7 +34,6 @@ def moveMotor(angle=180, mode="SPEED", pins=xAxisPins, stepsPerRevolution = 2048
   seqCounter = 0
 
   while True:
-    print(seqCounter)
     for i in range(4):
       pin = pins[i]
       if seq[seqCounter][i] != 0:
@@ -54,11 +46,16 @@ def moveMotor(angle=180, mode="SPEED", pins=xAxisPins, stepsPerRevolution = 2048
       seqCounter = 0
 
     stepCounter += stepDir   
-    #if stepCounter == stepsToComplete:
-     # break
+    if stepCounter == stepsToComplete:
+      break
 
     sleep(waitTime)
 
-moveMotor()
-sleep(2)
-moveMotor(-90.1)
+if __name__ == "__main__":
+  motorIN1 = stepper(4)
+  motorIN2 = stepper(17)
+  motorIN3 = stepper(27)
+  motorIN4 = stepper(22)
+  pins = [motorIN1, motorIN2, motorIN3, motorIN4]
+  while True:
+    moveMotor(pins)
