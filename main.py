@@ -8,14 +8,13 @@ from deepface import DeepFace
 video_capture = cv2.VideoCapture(0)
 
 ret, frame = video_capture.read()
-cv2.imshow('Video', frame)
-time.sleep(1)
+cv2.imwrite("image.jpg", frame)
 
 tinder_robot = TinderRobot()
 
 while True:
     ret, frame = video_capture.read()
-    cv2.imshow('Video', frame)
+#     cv2.imshow('Video', frame)
 
     cv2.imwrite("image.jpg", frame)
     # actions = ['age', 'gender', 'race', 'emotion']
