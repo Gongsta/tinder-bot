@@ -2,12 +2,19 @@ import time
 
 from deepface import DeepFace
 from helper import Server
+import json
 
 class TinderServer(Server):
     def __init__(self):
         Server.__init__(self)
         self.img_counter = 1
         self.img_basename = "./images/image%s.jpg"
+        try:
+            f = open('data.json')
+            self.match_data = json.load(f)
+        except:
+            self.match_data = []
+
 
     def handle_client(self, connection, address):
         """
@@ -69,18 +76,21 @@ class TinderServer(Server):
     def process_image(self, image_path):
         try:
             match = DeepFace.analyze(img_path = image_path, actions = ['race'])
+            self.match_data.append(match)
+            self.write_data_to_json(self.match_data)
             if match['dominant_race'] == 'asian':
                 return True
 
-        except:
+        except Exception as e:
+            print(e)
             return False
 
         return False
     def write_data_to_json(self, match):
         # Hard store this data that can be analyzed at a later time
         # TODO:
-        
-
+        with open("data.json", "w") as f:
+            json.dump(self.match_data, f)
 
 server = TinderServer()
 server.start()

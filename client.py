@@ -41,12 +41,11 @@ while True:
     cv2.imwrite("image.jpg", frame)
     response = client.send_image("image.jpg")
     print(response)
-    sleep(3)    
 
     if cv2.waitKey(10) == 27: #Press the "Escape key" to terminate the program
         video_capture.release()
         cv2.destroyAllWindows()
         print("Program terminated, I hope you found your match :)")
         break
-    tinder_robot.swipe_right() if match['dominant_race'] == 'asian' else tinder_robot.swipe_left()
+    tinder_robot.swipe_right() if response == b'Asian' else tinder_robot.swipe_left()
     
