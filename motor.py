@@ -3,7 +3,7 @@ from time import sleep
 
 
 
-def moveMotor(pins, angle=-180, mode="SPEED", stepsPerRevolution = 2048):
+def moveMotor(pins, angle=-360, mode="SPEED", stepsPerRevolution = 2048):
   stepsToComplete = int(angle * stepsPerRevolution / 360)
 
   # https://www.hackster.io/mjrobot/playing-with-electronics-rpi-gpio-zero-library-tutorial-f984c9#toc-controlling-a-stepper-motor-6

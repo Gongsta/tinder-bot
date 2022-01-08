@@ -17,12 +17,12 @@ class TinderRobot:
 
     def swipe_right(self):
         self.right_swipes += 1
-        moveMotor(self.pins, 180)
+        moveMotor(self.pins, -370) # Extra 10 degrees because the pen hitting the phone will cause friction
         return
 
     def swipe_left(self):
         self.left_swipes += 1
-        moveMotor(self.pins, -180)
+        moveMotor(self.pins, 370)
         return
 
     def return_total_swipes(self):
